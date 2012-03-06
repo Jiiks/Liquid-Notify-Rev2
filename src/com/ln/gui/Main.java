@@ -354,7 +354,7 @@ private static final long serialVersionUID = 1L;
 		Thread.setIcon(new ImageIcon(Configuration.mydir + "\\resources\\icons\\liquid.png"));
 		Thread.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String url = "http://teamliquid.net";
+				String url = "http://www.teamliquid.net/forum/viewmessage.php?topic_id=318184";
 				try {
 					java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
 				} catch (IOException e1) {
