@@ -170,10 +170,6 @@ private static final long serialVersionUID = 1L;
 		EventQueue.invokeLater(new Runnable(){
 			public void run(){
 				try{
-					f.setState(NORMAL);
-					f.setAlwaysOnTop(true);
-					JOptionPane.showMessageDialog(rootPane, ee, "Event Starting!", JOptionPane.INFORMATION_MESSAGE);
-					f.setAlwaysOnTop(false);
 					if (Configuration.soundnotify == 1){
 						try {
 							InputStream is = new FileInputStream(Configuration.soundpath);
@@ -185,6 +181,10 @@ private static final long serialVersionUID = 1L;
 							e1.printStackTrace();
 						}
 					}
+					f.setState(NORMAL);
+					f.setAlwaysOnTop(true);
+					JOptionPane.showMessageDialog(rootPane, ee, "Event Starting!", JOptionPane.INFORMATION_MESSAGE);
+					f.setAlwaysOnTop(false);
 				}catch (Exception e){				
 				}
 			}
