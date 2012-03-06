@@ -108,13 +108,12 @@ public class Main<notifierthread> extends JFrame implements ActionListener, Comp
 private static final long serialVersionUID = 1L;
 
 //Always declare components for easy time
-//Declare components{
+//Declare components
 	private static JPanel contentPane = new JPanel();
 	private static JTextArea NewsArea = new JTextArea();
 	private static JMenuBar menuBar = new JMenuBar();	
 	private static JMenu File = new JMenu("File");
 	public static JComboBox Titlebox;
-	//private final JComboBox comboBox = new JComboBox();
 	public final static JEditorPane Description = new JEditorPane();
 	public final static JScrollPane Descriptionscrollpane = new JScrollPane();
 	public static JFrame f = new JFrame();
@@ -125,8 +124,7 @@ private static final long serialVersionUID = 1L;
 	public static int[] intarra = {5, 4, 2};
 	public static int[] intarrb = {0, 7, 1};
 	JMenuItem Update = new JMenuItem("Check for updates");
-//}
-//Declare variables{
+//Declare variables
 	public static String News = "";
 	public static int second = 1000, minute = second*60, hour = minute*60, day = hour*24, week = day*7;
 	public static int fonp = 0;
@@ -143,7 +141,7 @@ private static final long serialVersionUID = 1L;
 	public static String[] ff;
 	private final JButton Notify = new JButton("Notify");
 	private final Component verticalStrut = Box.createVerticalStrut(20);
-	private final JButton btnNewButton_1 = new JButton("Events currently set to notify");
+	private final JButton eventsbtn = new JButton("Events currently set to notify");
 	public static String NOTIFY;
 	public static String[] NOA = new String[1000], Eventlist = new String[1000];
 	public static int NOTIFYD, NOTIFYH, NOTIFYM;
@@ -151,7 +149,6 @@ private static final long serialVersionUID = 1L;
 	public static int events = 0;
 	public static String ee;
 	public static int dayd, hourh, minutem;
-//}
 	
 	
 	
@@ -161,13 +158,10 @@ private static final long serialVersionUID = 1L;
 			public void run() {
 				try {
 					createandshowgui();
-
-				} catch (Exception e) {
-					
+				} catch (Exception e) {		
 					//Kill&print on errors
 					e.printStackTrace();
-					JOptionPane.showMessageDialog(null, e.getStackTrace(), "Error", JOptionPane.WARNING_MESSAGE);
-					
+					JOptionPane.showMessageDialog(null, e.getStackTrace(), "Error", JOptionPane.WARNING_MESSAGE);	
 				}
 			}
 		});
@@ -191,8 +185,7 @@ private static final long serialVersionUID = 1L;
 							e1.printStackTrace();
 						}
 					}
-				}catch (Exception e){
-					
+				}catch (Exception e){				
 				}
 			}
 		});
@@ -201,28 +194,25 @@ private static final long serialVersionUID = 1L;
 		EventQueue.invokeLater(new Runnable(){
 			public void run(){
 				try{
-		String st2221="Updates available!";
-		JOptionPane pane1 = new JOptionPane(st2221, JOptionPane.WARNING_MESSAGE,
+		String av="Updates available!";
+		JOptionPane pane1 = new JOptionPane(av, JOptionPane.WARNING_MESSAGE,
 		JOptionPane.DEFAULT_OPTION);
 		JDialog dialog1 = pane1.createDialog("Update");
 		dialog1.setLocationRelativeTo(null);
 		dialog1.setVisible(true);
-		dialog1.setAlwaysOnTop(true);
-		
+		dialog1.setAlwaysOnTop(true);		
 		Updatechecker upd = new Updatechecker();
 		upd.setVisible(true);
 		upd.setLocationRelativeTo(rootPane);
 		upd.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-				}catch (Exception e){
-					
-				}
-				}
-	});
+				}catch (Exception e){				
 			}
+		}
+	});
+}
 
 	//Create GUI	
 	public static void createandshowgui(){
-		//Main frame = new Main();
 		f = new Main();
 		f.setVisible(true);
 		f.setLocationRelativeTo(null);
@@ -239,8 +229,7 @@ private static final long serialVersionUID = 1L;
 		Date minute = new Date();
 		dayd = Integer.parseInt(dd.format(day));
 		hourh = Integer.parseInt(dh.format(hour));
-		minutem = Integer.parseInt(dm.format(minute));
-		
+		minutem = Integer.parseInt(dm.format(minute));	
 		setTitle("Liquid Notify Revision 2");
 		Description.setBackground(Color.WHITE);
 		Description.setContentType("text/html");
@@ -249,23 +238,20 @@ private static final long serialVersionUID = 1L;
 		HyperlinkListener hyperlinkListener = new ActivatedHyperlinkListener(
 		        f, Description);
 		    Description.addHyperlinkListener(hyperlinkListener);
-		
 		//Add components
 		setContentPane(contentPane);
 		setJMenuBar(menuBar);
 		contentPane.setLayout(new MigLayout("", "[220px:230.00:220,grow][209.00px:n:5000,grow]", "[22px][][199.00,grow][grow]"));
-		btnNewButton_1.setToolTipText("Displays events currently set to notify");
-		btnNewButton_1.setMinimumSize(new Dimension(220, 23));
-		btnNewButton_1.setMaximumSize(new Dimension(220, 23));
-		
-		contentPane.add(btnNewButton_1, "cell 0 0");
+		eventsbtn.setToolTipText("Displays events currently set to notify");
+		eventsbtn.setMinimumSize(new Dimension(220, 23));
+		eventsbtn.setMaximumSize(new Dimension(220, 23));	
+		contentPane.add(eventsbtn, "cell 0 0");
 		NewsArea.setBackground(Color.WHITE);
 		NewsArea.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.LIGHT_GRAY, Color.LIGHT_GRAY, Color.DARK_GRAY, Color.DARK_GRAY));
 		NewsArea.setMinimumSize(new Dimension(20, 22));
 		NewsArea.setMaximumSize(new Dimension(10000, 22));
 		contentPane.add(NewsArea, "cell 1 0,growx,aligny top");
-		menuBar.add(File);
-		
+		menuBar.add(File);	
 		JMenuItem Settings = new JMenuItem("Settings");
 		Settings.setIcon(new ImageIcon(Configuration.mydir + "\\resources\\icons\\settings.png"));
 		Settings.addActionListener(new ActionListener() {
@@ -286,11 +272,6 @@ private static final long serialVersionUID = 1L;
 		Update.setIcon(new ImageIcon(Configuration.mydir + "\\resources\\icons\\update.png"));
 		Update.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-
-
-				
-				
-				
 				try {
 					URL localURL = new URL("http://jiiks.net23.net/tlnotify/online.html");
 					URLConnection localURLConnection = localURL.openConnection();
@@ -344,8 +325,7 @@ private static final long serialVersionUID = 1L;
 				}
 				
 		});
-		mnNewMenu.add(Update);
-		
+		mnNewMenu.add(Update);		
 		JMenuItem About = new JMenuItem("About");
 		About.setIcon(new ImageIcon(Configuration.mydir + "\\resources\\icons\\about.png"));
 		About.addActionListener(new ActionListener() {
@@ -356,8 +336,7 @@ private static final long serialVersionUID = 1L;
 				a.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 			}
 		});
-		mnNewMenu.add(About);
-		
+		mnNewMenu.add(About);	
 		JMenuItem Github = new JMenuItem("Github");
 		Github.setIcon(new ImageIcon(Configuration.mydir + "\\resources\\icons\\github.png"));
 		Github.addActionListener(new ActionListener() {
@@ -370,8 +349,7 @@ private static final long serialVersionUID = 1L;
 				}
 			}
 		});
-		mnNewMenu.add(Github);
-		
+		mnNewMenu.add(Github);		
 		JMenuItem Thread = new JMenuItem("Thread");
 		Thread.setIcon(new ImageIcon(Configuration.mydir + "\\resources\\icons\\liquid.png"));
 		Thread.addActionListener(new ActionListener() {
@@ -388,16 +366,13 @@ private static final long serialVersionUID = 1L;
 		Refreshbtn.setToolTipText("Refreshes calendar, please don't spam ^_^");
 		Refreshbtn.setPreferredSize(new Dimension(90, 20));
 		Refreshbtn.setMinimumSize(new Dimension(100, 20));
-		Refreshbtn.setMaximumSize(new Dimension(100, 20));
-		
+		Refreshbtn.setMaximumSize(new Dimension(100, 20));	
 		contentPane.add(Refreshbtn, "flowx,cell 0 1,alignx left");
-		
 		//Components to secondary panel	
 		Titlebox = new JComboBox();
 		contentPane.add(Titlebox, "cell 1 1,growx,aligny top");
 		Titlebox.setMinimumSize(new Dimension(20, 20));
 		Titlebox.setMaximumSize(new Dimension(10000, 20));
-
 		//Set other
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 686, 342);
@@ -421,23 +396,16 @@ private static final long serialVersionUID = 1L;
 		calendar.setDecorationBordersVisible(true);
 		calendar.setTodayButtonVisible(true);
 		calendar.setBackground(Color.LIGHT_GRAY);
-
 		calendar.setBounds(0, 0, 220, 199);
 		calendar.getDate();
 		calendar.setWeekOfYearVisible(false);
 		calendar.setDecorationBackgroundVisible(false);
 		calendar.setMaxDayCharacters(2);
 		calendar.getDayChooser().setFont(new Font("Tahoma", Font.PLAIN, 10));
-		panel.add(calendar);
-		/****Temp calendar buttons****/
-		
-		
-		
+		panel.add(calendar);	
 		Descriptionscrollpane.setLocation(new Point(100, 100));
 		Descriptionscrollpane.setMaximumSize(new Dimension(10000, 10000));
-		Descriptionscrollpane.setMinimumSize(new Dimension(20, 200));
-		
-		
+		Descriptionscrollpane.setMinimumSize(new Dimension(20, 200));	
 		Description.setLocation(new Point(100, 100));
 		Description.setBorder(new BevelBorder(BevelBorder.LOWERED, Color.LIGHT_GRAY, Color.LIGHT_GRAY, Color.DARK_GRAY, Color.DARK_GRAY));
 		Description.setMaximumSize(new Dimension(1000, 400));
@@ -445,14 +413,12 @@ private static final long serialVersionUID = 1L;
 		contentPane.add(Descriptionscrollpane, "cell 1 2 1 2,growx,aligny top");
 		Descriptionscrollpane.setViewportView(Description);
 		verticalStrut.setMinimumSize(new Dimension(12, 20));
-		
 		contentPane.add(verticalStrut, "cell 0 1");
 		Notify.setToolTipText("Adds selected event to notify event list.");
 		Notify.setHorizontalTextPosition(SwingConstants.CENTER);
 		Notify.setPreferredSize(new Dimension(100, 20));
 		Notify.setMinimumSize(new Dimension(100, 20));
 		Notify.setMaximumSize(new Dimension(100, 20));
-		
 		contentPane.add(Notify, "cell 0 1,alignx right");
 		calendar.getMonthChooser().addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent e) {
@@ -462,7 +428,6 @@ private static final long serialVersionUID = 1L;
 		});
 		
 
-		
 		calendar.getDayChooser().addPropertyChangeListener(new PropertyChangeListener() {
 			public void propertyChange(PropertyChangeEvent e) {
 				try{
@@ -487,8 +452,6 @@ private static final long serialVersionUID = 1L;
 					int Events = 0;
 					monthday = monthstring + "|" + datestring + "|";
 					Titlebox.removeAllItems();
-					
-					
 					for (int a = 0 ; a != Hours.length ; a++){
 						IntHours[a] = Integer.parseInt(Hours[a]);
 						IntMins[a] = Integer.parseInt(Minutes[a]);
@@ -496,13 +459,11 @@ private static final long serialVersionUID = 1L;
 					for (int i1 = 0 ; i1 != Hours.length ; i1++){
 						if (Betaparser.Events[i1].startsWith(monthday)){
 							Full[i1] = String.format("%02d:%02d", IntHours[i1], IntMins[i1]) + " | " + Titles[i1];
-							Titlebox.addItem(Full[i1]);
-							
+							Titlebox.addItem(Full[i1]);					
 						}
 					}
 				}catch (Exception e1){
-					//Catching mainly due to boot property change
-					
+					//Catching mainly due to boot property change				
 				}
 			}
 		});
@@ -581,7 +542,7 @@ private static final long serialVersionUID = 1L;
 
 
 		
-		btnNewButton_1.addActionListener(new ActionListener() {
+		eventsbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Notifylist list = new Notifylist();
 				list.setVisible(true);
