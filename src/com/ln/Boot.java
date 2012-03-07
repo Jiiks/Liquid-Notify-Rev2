@@ -65,7 +65,8 @@ public class Boot extends JFrame {
 		String load = Configuration.mydir + "/resources/config.cfg";
 		try {
 			FileInputStream is = new FileInputStream(load);
-			settings.load(is);			
+			settings.load(is);	
+			Configuration.popup = Integer.parseInt(settings.getProperty("Popupenabled"));
 			Configuration.autoupdate = Integer.parseInt(settings.getProperty("Autoupdate"));
 			Configuration.notifytime = Integer.parseInt(settings.getProperty("Notifytime"));
 			Configuration.autorefresh = Integer.parseInt(settings.getProperty("AutoRefresh"));
@@ -77,12 +78,10 @@ public class Boot extends JFrame {
 		} catch (IOException e1) {
 			JOptionPane.showMessageDialog(null, "Config file not found", "Error", JOptionPane.ERROR_MESSAGE);
 			e1.printStackTrace();
+		} catch (NumberFormatException e1){
+			JOptionPane.showMessageDialog(null, "Missing config parameters, download latest cfg from github", "Error", JOptionPane.ERROR_MESSAGE);
 		}
-		
 
-
-		
-		
 		try{
 			if (Configuration.theme == 0){UIManager.setLookAndFeel(new SubstanceAutumnLookAndFeel());Configuration.theme = 0;}
 			if (Configuration.theme == 1){UIManager.setLookAndFeel(new SubstanceBusinessBlackSteelLookAndFeel());Configuration.theme = 1;}

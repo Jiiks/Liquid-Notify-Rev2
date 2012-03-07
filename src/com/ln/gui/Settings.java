@@ -24,6 +24,7 @@ import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingWorker;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -62,7 +63,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.SwingConstants;
 
-public class Settings extends JFrame {
+public class Settings<play> extends JFrame {
 	static Settings frame = new Settings();
 	final JSpinner spinner = new JSpinner();
 	final JCheckBox chckbxNewCheckBox = new JCheckBox("");
@@ -71,6 +72,9 @@ public class Settings extends JFrame {
 	final SpinnerNumberModel model = new SpinnerNumberModel(1, 1, 60, 1);
 	final SpinnerNumberModel model2 = new SpinnerNumberModel(5, 5, 60, 1);
 	final JCheckBox Autoupdate = new JCheckBox("");
+	final JCheckBox Popup = new JCheckBox("");
+	public Player asd;
+	public int stop = 0;
 	
 
 	private JPanel contentPane;
@@ -101,7 +105,7 @@ public class Settings extends JFrame {
 		setTitle("Settings");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 357, 253);
+		setBounds(100, 100, 357, 282);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -117,6 +121,8 @@ public class Settings extends JFrame {
 		Themelabel.setBounds(10, 10, 58, 20);
 		contentPane.add(Themelabel);
 		Themebox.setSelectedIndex(Configuration.theme);
+		if (Configuration.popup == 1){Popup.setSelected(false);}
+		if (Configuration.popup == 0){Popup.setSelected(true);}
 		if (Configuration.autoupdate == 1){Autoupdate.setSelected(true);}
 		if (Configuration.autoupdate == 0){Autoupdate.setSelected(false);}
 		if (Configuration.autorefresh == 1){chckbxNewCheckBox.setSelected(true);}
@@ -134,6 +140,11 @@ public class Settings extends JFrame {
 		JButton SaveButton = new JButton("Save");
 		SaveButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
+				if (Popup.isSelected()){
+					Configuration.popup = 0;
+				}else if (!Popup.isSelected()){
+					Configuration.popup = 1;
+				}
 				if (Autoupdate.isSelected()){
 					Configuration.autoupdate = 1;
 				}else if (!Autoupdate.isSelected()){
@@ -190,6 +201,8 @@ public class Settings extends JFrame {
 					save.newLine();
 					save.write("Soundnotify=" + Integer.toString(Configuration.soundnotify));
 					save.newLine();
+					save.write("Popupenabled=" + Integer.toString(Configuration.popup));
+					save.newLine();
 					save.write("Theme=" + Integer.toString(Configuration.theme));
 					save.newLine();
 					String sound = Configuration.soundpath.replace("\\", "\\\\");
@@ -202,7 +215,7 @@ public class Settings extends JFrame {
 				}
 				}
 		});
-		SaveButton.setBounds(10, 190, 77, 23);
+		SaveButton.setBounds(10, 221, 77, 23);
 		contentPane.add(SaveButton);
 		
 		JLabel Notifylabel = new JLabel("Notify");
@@ -253,7 +266,7 @@ public class Settings extends JFrame {
 				spinner_1.setValue(5);
 			}
 		});
-		btnDefault.setBounds(95, 190, 77, 23);
+		btnDefault.setBounds(95, 221, 77, 23);
 		contentPane.add(btnDefault);
 		
 		JButton btnClose = new JButton("Close");
@@ -262,7 +275,7 @@ public class Settings extends JFrame {
 				dispose();
 			}
 		});
-		btnClose.setBounds(265, 190, 77, 23);
+		btnClose.setBounds(265, 221, 77, 23);
 		contentPane.add(btnClose);
 		
 		JButton btnDiscard = new JButton("Discard");
@@ -279,7 +292,7 @@ public class Settings extends JFrame {
 				spinner_1.setValue(Configuration.refreshtime);
 			}
 		});
-		btnDiscard.setBounds(180, 190, 77, 23);
+		btnDiscard.setBounds(180, 221, 77, 23);
 		contentPane.add(btnDiscard);
 		
 		JLabel lblSoundOnNotify = new JLabel("Notify sound");
@@ -289,7 +302,7 @@ public class Settings extends JFrame {
 		Soundcheck.setHorizontalTextPosition(SwingConstants.CENTER);
 		Soundcheck.setHorizontalAlignment(SwingConstants.CENTER);
 		Soundcheck.setBorder(null);
-		Soundcheck.setToolTipText("Player is currently not threaded.\r\nSo avoid too long sound clips.");
+		//Soundcheck.setToolTipText("Player is currently not threaded.\r\nSo avoid too long sound clips."); is now threaded
 
 		Soundcheck.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -311,9 +324,9 @@ public class Settings extends JFrame {
 		});
 		Soundcheck.setBounds(97, 131, 20, 20);
 		contentPane.add(Soundcheck);
-		
+		final JButton buttonstop = new JButton("");
 		final JButton btnNewButton = new JButton("");
-		btnNewButton.setToolTipText("Player is currently not threaded.\r\nSo avoid too long sound clips.");
+		//btnNewButton.setToolTipText("Player is currently not threaded.\r\nSo avoid too long sound clips."); is now threaded
 		btnNewButton.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseEntered(MouseEvent arg0) {
@@ -331,16 +344,22 @@ public class Settings extends JFrame {
 		btnNewButton.setIcon(new ImageIcon(Configuration.mydir + "\\resources\\icons\\play2.png"));
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					InputStream is = new FileInputStream(Configuration.soundpath);
-					Player asd = new Player(is);
-					asd.play();
-				} catch (JavaLayerException e1) {
-					e1.printStackTrace();
-				} catch (FileNotFoundException e1) {
-					JOptionPane.showMessageDialog(rootPane, "No sound set/Invalid path", "File not found", JOptionPane.ERROR_MESSAGE);
-					e1.printStackTrace();
-				}
+				player.execute();
+				stop = 0;
+				buttonstop.setEnabled(true);
+				btnNewButton.setEnabled(false);
+				buttonstop.setVisible(true);
+				btnNewButton.setVisible(false);
+//				try {
+//					InputStream is = new FileInputStream(Configuration.soundpath);
+//					Player asd = new Player(is);
+//					asd.play();
+//				} catch (JavaLayerException e1) {
+//					e1.printStackTrace();
+//				} catch (FileNotFoundException e1) {
+//					JOptionPane.showMessageDialog(rootPane, "No sound set/Invalid path", "File not found", JOptionPane.ERROR_MESSAGE);
+//					e1.printStackTrace();
+//				}
 			}
 		});
 		btnNewButton.setPreferredSize(new Dimension(59, 20));
@@ -359,5 +378,57 @@ public class Settings extends JFrame {
 		Autoupdate.setHorizontalAlignment(SwingConstants.CENTER);
 		Autoupdate.setBounds(167, 162, 20, 20);
 		contentPane.add(Autoupdate);
+		
+		JLabel lblDisablePopupNotify = new JLabel("Disable popup notify");
+		lblDisablePopupNotify.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		lblDisablePopupNotify.setBounds(10, 190, 150, 20);
+		contentPane.add(lblDisablePopupNotify);
+		
+		Popup.setToolTipText("");
+		Popup.setHorizontalTextPosition(SwingConstants.CENTER);
+		Popup.setHorizontalAlignment(SwingConstants.CENTER);
+		Popup.setBounds(167, 190, 20, 20);
+		contentPane.add(Popup);
+		
+		buttonstop.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (!asd.isComplete()){
+					buttonstop.setEnabled(false);
+					btnNewButton.setEnabled(true);
+					buttonstop.setVisible(false);
+					btnNewButton.setVisible(true);
+					asd.close();
+					stop = 1;
+				}
+			}
+		});
+		buttonstop.setIcon(new ImageIcon(Configuration.mydir + "\\resources\\icons\\stop.png"));
+		//buttonstop.setToolTipText("Player is currently not threaded.\r\nSo avoid too long sound clips."); is now threaded
+		buttonstop.setPreferredSize(new Dimension(59, 20));
+		buttonstop.setOpaque(false);
+		buttonstop.setMinimumSize(new Dimension(59, 20));
+		buttonstop.setMaximumSize(new Dimension(59, 20));
+		buttonstop.setContentAreaFilled(false);
+		buttonstop.setBorderPainted(false);
+		buttonstop.setBounds(126, 131, 20, 20);
+		contentPane.add(buttonstop);
 	}
+	public  SwingWorker player = new SwingWorker<play, Void>(){
+		public play doInBackground() throws InterruptedException{	
+			while ( true ){
+				try {
+					InputStream is = new FileInputStream(Configuration.soundpath);
+					asd = new Player(is);
+					if (stop == 0){
+					asd.play();
+					}
+				} catch (JavaLayerException e1) {
+					e1.printStackTrace();
+				} catch (FileNotFoundException e1) {
+					JOptionPane.showMessageDialog(rootPane, "No sound set/Invalid path", "File not found", JOptionPane.ERROR_MESSAGE);
+					e1.printStackTrace();
+				}
+			}
+			}
+	};
 }

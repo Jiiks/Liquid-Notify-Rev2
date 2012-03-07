@@ -149,6 +149,8 @@ private static final long serialVersionUID = 1L;
 	public static int events = 0;
 	public static String ee;
 	public static int dayd, hourh, minutem;
+	public Player asd;
+
 	
 	
 	
@@ -170,20 +172,11 @@ private static final long serialVersionUID = 1L;
 		EventQueue.invokeLater(new Runnable(){
 			public void run(){
 				try{
-					if (Configuration.soundnotify == 1){
-						try {
-							InputStream is = new FileInputStream(Configuration.soundpath);
-							Player asd = new Player(is);
-							asd.play();
-						} catch (JavaLayerException e1) {
-							e1.printStackTrace();
-						} catch (FileNotFoundException e1) {
-							e1.printStackTrace();
-						}
-					}
 					f.setState(NORMAL);
 					f.setAlwaysOnTop(true);
+					if (Configuration.popup == 1){
 					JOptionPane.showMessageDialog(rootPane, ee, "Event Starting!", JOptionPane.INFORMATION_MESSAGE);
+					}
 					f.setAlwaysOnTop(false);
 				}catch (Exception e){				
 				}
@@ -545,6 +538,9 @@ private static final long serialVersionUID = 1L;
 		eventsbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Notifylist list = new Notifylist();
+				if (!asd.isComplete()){
+					asd.close();
+				}
 				list.setVisible(true);
 				list.setLocationRelativeTo(rootPane);
 				list.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -653,6 +649,18 @@ private static final long serialVersionUID = 1L;
 					hour[i] = Integer.parseInt(StringUtils.substringBetween(Notifylist.Events2[i], "Days ", " Hours"))-hourdiff;
 					minute[i] = Integer.parseInt(StringUtils.substringBetween(Notifylist.Events2[i], "Hours ", " Minutes"))-mindiff;
 					if (day[i] == 0 && hour[i] == 0 && minute[i] < Configuration.notifytime && minute[i] > 0){
+						if (Configuration.soundnotify == 1){
+							try {
+							    InputStream is = new FileInputStream(Configuration.soundpath);
+								//Player asd = new Player(is);
+							    asd = new Player(is);
+							    asd.play();
+							} catch (JavaLayerException e1) {
+								e1.printStackTrace();
+							} catch (FileNotFoundException e1) {
+								e1.printStackTrace();
+							}
+						}
 						ee = "Starts in "+Integer.toString(minute[i])+" minutes: | " + title[i];
 						minute[i] = minute[i] - 1;
 						gg();

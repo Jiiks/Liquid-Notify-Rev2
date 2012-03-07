@@ -24,13 +24,14 @@ package com.ln;
 import java.io.File;
 
 public class Configuration {
-		public static int version = 002;
+		public static int version = 003;
 		public static int autoupdate = 0;
 	    public static int notifytime = 0;
 	    public static int autorefresh = 0;
 	    public static int refreshtime = 5;
 	    public static int soundnotify = 0;
 		public static int theme = 11;
+		public static int popup = 1;
 		public static String Year = "2012";
 		public static String soundpath = "";
 		public static String mydir = System.getProperty ("user.dir"); 

@@ -31,6 +31,7 @@ import org.apache.commons.lang3.StringUtils;
 import ru.perm.kefir.bbcode.BBProcessorFactory;
 import ru.perm.kefir.bbcode.TextProcessor;
 
+import com.ln.Configuration;
 import com.ln.gui.Main;
 
 public class Descparser {
@@ -136,14 +137,16 @@ public class Descparser {
 			String[] region = StringUtils.substringsBetween(formatteddesc, "[region]", "[/region]");
 			
 			try{
+				if (formatteddesc.contains("tlpd")){
 				formatteddesc = formatteddesc.replace("[tlpd]", "").replace("[/tlpd]", "");	
 			for (int i1 = 0 ; i1 != tlpd.length ; i1++){
 				formatteddesc = formatteddesc.replace(tlpd[i1], "<a href=\"http://www.teamliquid.net/tlpd/" + cat[i1] + "/" + region[i1] + "/" + ids[i1] + "\">" + names[i1] + "</a>");			
 
 		//	formatteddesc = formatteddesc.replace("[tlpd]", "").replace("[/tlpd]", "");		
 			}
+				}
 			
-			}catch(NullPointerException e){}
+			}catch(NullPointerException e){e.printStackTrace();}
 			formatteddesc = formatteddesc.replace("&lt;", "").replace("gt;", "");
 			Main.Description.setText((Full[selectedindex] + formatted[selectedindex] + "<br>" + formatteddesc));
 			try{
@@ -169,13 +172,13 @@ public class Descparser {
 			 TTT = Full[selectedindex];
 			}
 			}
-			}catch (Exception e){}
+			}catch (Exception e){e.printStackTrace();}
 			Main.Description.setCaretPosition(0);
 			
 		}
 		}
 		
-		}catch (IndexOutOfBoundsException e){}
+		}catch (IndexOutOfBoundsException e){e.printStackTrace();}
 
 
 
