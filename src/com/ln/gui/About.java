@@ -95,7 +95,7 @@ public class About extends JFrame {
 		lblNewLabel_1.setBounds(74, 0, 263, 61);
 		contentPane.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("Version 0.2");
+		JLabel lblNewLabel_2 = new JLabel("Version 0.21");
 		lblNewLabel_2.setBounds(76, 50, 76, 14);
 		contentPane.add(lblNewLabel_2);
 		HyperlinkListener hyperlinkListener = new ActivatedHyperlinkListener(
