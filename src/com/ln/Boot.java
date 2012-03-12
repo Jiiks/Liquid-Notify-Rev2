@@ -22,25 +22,16 @@ import java.awt.EventQueue;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Properties;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.UIManager;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-
-
 import org.pushingpixels.substance.api.skin.*;
-
 import com.ln.gui.Main;
+import com.ln.methods.Userstream;
 
 public class Boot extends JFrame {
 
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -54,10 +45,8 @@ public class Boot extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public Boot() {
+		Userstream.Main();
 		if (!Configuration.config.exists()){
 			Configuration.config.mkdir();
 		}
@@ -81,7 +70,6 @@ public class Boot extends JFrame {
 		} catch (NumberFormatException e1){
 			JOptionPane.showMessageDialog(null, "Missing config parameters, download latest cfg from github", "Error", JOptionPane.ERROR_MESSAGE);
 		}
-
 		try{
 			if (Configuration.theme == 0){UIManager.setLookAndFeel(new SubstanceAutumnLookAndFeel());Configuration.theme = 0;}
 			if (Configuration.theme == 1){UIManager.setLookAndFeel(new SubstanceBusinessBlackSteelLookAndFeel());Configuration.theme = 1;}
@@ -111,10 +99,8 @@ public class Boot extends JFrame {
 			if (Configuration.theme == 25){UIManager.setLookAndFeel(new SubstanceTwilightLookAndFeel());Configuration.theme = 25;}
 			setDefaultLookAndFeelDecorated(true);
 		}
-		catch(Exception e){
-			
+		catch(Exception e){			
 		}
-
 		Main frame = new Main();
 		frame.setVisible(true);
 		frame.setLocationRelativeTo(null);

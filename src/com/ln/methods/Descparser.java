@@ -25,13 +25,9 @@ package com.ln.methods;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
 import org.apache.commons.lang3.StringUtils;
-
 import ru.perm.kefir.bbcode.BBProcessorFactory;
 import ru.perm.kefir.bbcode.TextProcessor;
-
-import com.ln.Configuration;
 import com.ln.gui.Main;
 
 public class Descparser {

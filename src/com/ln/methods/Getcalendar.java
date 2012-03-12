@@ -22,21 +22,12 @@
 
 package com.ln.methods;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.Reader;
-import java.io.StringWriter;
-import java.io.Writer;
+import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-
 import javax.swing.JOptionPane;
 import org.apache.commons.lang3.StringUtils;
-
 import com.ln.Configuration;
 
 public class Getcalendar {
@@ -66,7 +57,6 @@ public class Getcalendar {
 	        Betaparser.source = sw.toString();
 	        String lol = sw.toString();
 	        lol = StringUtils.substringBetween(lol, "<month year=\"2012\" num=\"2\">", "</month>");
-	      //  Parser.source = lol;
 			Parser.parse();
 			Betaparser.parse();
 

@@ -30,58 +30,20 @@
 
 package com.ln.gui;
 
-
-
-import java.awt.AWTException;
-import java.awt.EventQueue;
-import java.awt.Frame;
-import java.awt.Image;
-import java.awt.MenuItem;
-import java.awt.PopupMenu;
-import java.awt.SystemTray;
-import java.awt.Toolkit;
-import java.awt.TrayIcon;
-import java.awt.Window;
-
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import java.awt.*;
+import javax.swing.*;
+import java.io.*;
 import net.miginfocom.swing.MigLayout;
-
-import javax.swing.JDialog;
-import javax.swing.JEditorPane;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JMenuBar;
-import javax.swing.JMenu;
-import javax.swing.JMenuItem;
-import javax.swing.SwingWorker;
-
+import org.apache.commons.lang3.StringUtils;
+import com.toedter.calendar.JCalendar;
+import javazoom.jl.decoder.JavaLayerException;
+import javazoom.jl.player.Player;
 import com.ln.Configuration;
-import com.ln.methods.Betaparser;
-import com.ln.methods.Descparser;
-import com.ln.methods.Getcalendar;
-import com.ln.methods.Parser;
+import com.ln.methods.*;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-
-import javax.swing.JComboBox;
-import java.awt.Dimension;
-import javax.swing.border.BevelBorder;
-import java.awt.Point;
-import javax.swing.JButton;
-
-import org.apache.commons.lang3.StringUtils;
-import com.toedter.calendar.JCalendar;
-import java.awt.Color;
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
@@ -90,18 +52,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
-
+import javax.swing.SwingConstants;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.BevelBorder;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeEvent;
-import java.awt.Font;
-import javax.swing.SwingConstants;
-import java.awt.Component;
-import javax.swing.Box;
-import javax.swing.border.EtchedBorder;
 
-import javazoom.jl.decoder.JavaLayerException;
-import javazoom.jl.player.Player;
-import javax.swing.ImageIcon;
+
+
 
 @SuppressWarnings("rawtypes")
 public class Main<notifierthread> extends JFrame implements ActionListener, Comparable {
@@ -127,14 +85,8 @@ private static final long serialVersionUID = 1L;
 //Declare variables
 	public static String News = "";
 	public static int second = 1000, minute = second*60, hour = minute*60, day = hour*24, week = day*7;
-	public static int fonp = 0;
-	public static int sdate = 0;
-	public static int month = 1;
-	public static int today = 0;
-	public static int aupd = 0, refresh = 0;
-	public static String monthstring;
-	public static String datestring;
-	public static String monthday;
+	public static int fonp = 0,sdate = 0,month = 1,today = 0,aupd = 0, refresh = 0, played = 0, stream = 0;
+	public static String monthstring,datestring,monthday;
 	public static String[] Descs;
 	public static int globmonth;
 	public static URL url;
@@ -254,7 +206,8 @@ private static final long serialVersionUID = 1L;
 				setup.setLocationRelativeTo(rootPane);
 			}
 		});
-		File.add(Settings);
+		File.add(Settings);	
+		File.add(mntmNewMenuItem);
 		Tray.setIcon(new ImageIcon(Configuration.mydir + "\\resources\\icons\\ln1616.png"));
 		File.add(Tray);
 		Exit.setIcon(new ImageIcon(Configuration.mydir + "\\resources\\icons\\exit.png"));
@@ -527,19 +480,17 @@ private static final long serialVersionUID = 1L;
 				si.setVisible(false);
 				si.setBounds(1, 1, 1, 1);
 				si.dispose();
-				thread.execute();
-				
-				
+				if (thread.getState().name().equals("PENDING")){
+					thread.execute();
 				}
+			}
 		});
-
-
-		
 		eventsbtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Notifylist list = new Notifylist();
-				if (!asd.isComplete()){
+				if (played == 1){
 					asd.close();
+					played = 0;
 				}
 				list.setVisible(true);
 				list.setLocationRelativeTo(rootPane);
@@ -547,6 +498,16 @@ private static final long serialVersionUID = 1L;
 			}
 		});
 		
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (thread.getState().name().equals("PENDING")){
+					thread.execute();
+				}
+				Userstreams us = new Userstreams();
+				us.setVisible(true);
+				us.setLocationRelativeTo(rootPane);
+			}
+		});
 		
 		Exit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -591,6 +552,13 @@ private static final long serialVersionUID = 1L;
 	public  SwingWorker thread = new SwingWorker<notifierthread, Void>(){
 		public notifierthread doInBackground() throws InterruptedException{	
 			while ( true ){
+				if (Userstreams.streams == 1){
+					stream = stream + 1;
+					if (stream == 5){
+						Userstreams.check();
+						stream = 0;
+					}
+				}
 				if (Configuration.autorefresh == 1){
 					refresh = refresh + 1;
 					if (refresh == Configuration.refreshtime){
@@ -654,6 +622,7 @@ private static final long serialVersionUID = 1L;
 							    InputStream is = new FileInputStream(Configuration.soundpath);
 								//Player asd = new Player(is);
 							    asd = new Player(is);
+							    played = 1;
 							    asd.play();
 							} catch (JavaLayerException e1) {
 								e1.printStackTrace();
@@ -678,6 +647,7 @@ private static final long serialVersionUID = 1L;
 	};
 	private final JMenuItem Tray = new JMenuItem("Send to tray");
 	private final JMenu mnNewMenu = new JMenu("Help");
+	private final JMenuItem mntmNewMenuItem = new JMenuItem("User Streams");
 }
 
 

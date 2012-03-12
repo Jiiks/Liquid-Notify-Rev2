@@ -30,8 +30,6 @@ public class Betaparser {
 	    return true;
 	}
 
-
-	
 	public static int hour, minute, second, hour2, minute2, second2, hourd, mind, secd;
 	public static String source, Month1, Month2;
 	public static String[] Temp, Temp2;

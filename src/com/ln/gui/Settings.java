@@ -20,44 +20,20 @@ package com.ln.gui;
 import java.awt.EventQueue;
 
 
-import javax.swing.JFileChooser;
-import javax.swing.JFrame;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.SwingWorker;
-import javax.swing.UIManager;
+import javax.swing.*;
+import java.io.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.JButton;
-
 import com.ln.Configuration;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.io.BufferedWriter;
-import java.io.DataOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import javax.swing.DefaultComboBoxModel;
-
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.pushingpixels.substance.api.skin.*;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerNumberModel;
-import javax.swing.JCheckBox;
 import java.awt.Dimension;
-
 import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.*;
-import javax.swing.ImageIcon;
 import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -79,9 +55,6 @@ public class Settings<play> extends JFrame {
 
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -95,9 +68,6 @@ public class Settings<play> extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public Settings() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Configuration.mydir + "\\resources\\icons\\ln6464.png"));
 		spinner.setModel(model);
@@ -350,16 +320,6 @@ public class Settings<play> extends JFrame {
 				btnNewButton.setEnabled(false);
 				buttonstop.setVisible(true);
 				btnNewButton.setVisible(false);
-//				try {
-//					InputStream is = new FileInputStream(Configuration.soundpath);
-//					Player asd = new Player(is);
-//					asd.play();
-//				} catch (JavaLayerException e1) {
-//					e1.printStackTrace();
-//				} catch (FileNotFoundException e1) {
-//					JOptionPane.showMessageDialog(rootPane, "No sound set/Invalid path", "File not found", JOptionPane.ERROR_MESSAGE);
-//					e1.printStackTrace();
-//				}
 			}
 		});
 		btnNewButton.setPreferredSize(new Dimension(59, 20));

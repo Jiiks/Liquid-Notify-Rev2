@@ -17,37 +17,25 @@
 
 package com.ln.gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Frame;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Toolkit;
-import javax.swing.JEditorPane;
-import javax.swing.border.EtchedBorder;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
 import java.awt.Font;
 import java.awt.Color;
+import javax.swing.*;
+import javax.swing.border.EtchedBorder;
 import java.io.IOException;
 import java.net.URL;
-
 import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.BevelBorder;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.event.HyperlinkListener;
-
 import com.ln.Configuration;
 
 public class About extends JFrame {
 
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -61,9 +49,6 @@ public class About extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public About() {
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Configuration.mydir + "\\resources\\icons\\ln6464.png"));
@@ -95,7 +80,7 @@ public class About extends JFrame {
 		lblNewLabel_1.setBounds(74, 0, 263, 61);
 		contentPane.add(lblNewLabel_1);
 		
-		JLabel lblNewLabel_2 = new JLabel("Version 0.21");
+		JLabel lblNewLabel_2 = new JLabel("Version 0.22");
 		lblNewLabel_2.setBounds(76, 50, 76, 14);
 		contentPane.add(lblNewLabel_2);
 		HyperlinkListener hyperlinkListener = new ActivatedHyperlinkListener(

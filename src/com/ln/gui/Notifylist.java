@@ -18,25 +18,16 @@
 package com.ln.gui;
 
 import java.awt.EventQueue;
-import java.awt.Frame;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-
-import javax.swing.DefaultListModel;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JList;
-import javax.swing.JButton;
+import javax.swing.*;
 import javax.swing.border.BevelBorder;
-import javax.swing.JScrollPane;
+import javax.swing.border.EmptyBorder;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-
 import com.ln.Configuration;
-
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
@@ -65,9 +56,6 @@ public class Notifylist extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	@SuppressWarnings("unchecked")
 	public Notifylist() {
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
