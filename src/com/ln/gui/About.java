@@ -34,6 +34,7 @@ import com.ln.Configuration;
 
 public class About extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	public static void main(String[] args) {

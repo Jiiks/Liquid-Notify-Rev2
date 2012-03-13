@@ -34,7 +34,6 @@ public class Descparser {
 	public static int d2, h2, m2;
 	public static String test = "", TTT = "";
 	public static int DDD, HHH, MMM;
-	private static final long serialVersionUID = 1L;
 	//TODO parse urls, tlpd links, and other stuff
 	//TODO get time, time also needs to be on titlebox
 	public static void parsedesc(){

@@ -17,7 +17,6 @@
 
 package com.ln.gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -37,17 +36,15 @@ import java.nio.channels.ReadableByteChannel;
 
 import javax.swing.JEditorPane;
 import javax.swing.JScrollPane;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.JButton;
-import javax.swing.JSplitPane;
-import java.awt.Component;
-import javax.swing.Box;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Updatechecker extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+
 	public static String latestver = "";
 
 	private JPanel contentPane;

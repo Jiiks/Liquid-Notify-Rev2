@@ -1,23 +1,16 @@
 package com.ln.gui;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
-import java.util.Vector;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import net.miginfocom.swing.MigLayout;
-import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
-
-import org.apache.commons.lang3.ArrayUtils;
 
 import com.ln.Configuration;
 import com.ln.methods.Userstream;
@@ -26,6 +19,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class Userstreams extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+
 	public static int streams = 0;
 
 	private JPanel contentPane;
@@ -63,11 +59,12 @@ public class Userstreams extends JFrame {
 		
 		table = new JTable();
 		table.setModel(new DefaultTableModel(
-			new Object[][] {{null},{null},{null},{null},{null},{null},{null},{null},{null},
-				{null},{null},{null},{null},{null},{null},{null},{null},{null},{null},
-				{null},{null},{null},{null},{null},{null},{null},{null},{null},{null},
-				{null},{null},{null},{null},{null},{null},{null},{null},{null},{null},
-				{null},{null},{null},{null},{null},{null},{null},{null},{null},{null},{null},
+			new Object[][] {{null},{null},{null},{null},{null},{null},{null},{null},
+				{null},{null},{null},{null},{null},{null},{null},{null},{null},
+				{null},{null},{null},{null},{null},{null},{null},{null},{null},
+				{null},{null},{null},{null},{null},{null},{null},{null},
+				{null},{null},{null},{null},{null},{null},{null},{null},
+				{null},{null},{null},{null},{null},{null},{null},{null},
 			},
 			new String[] {
 				"Stream Name"

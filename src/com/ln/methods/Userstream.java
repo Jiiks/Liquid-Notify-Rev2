@@ -8,15 +8,13 @@ import java.io.Reader;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
-
-import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 
 import com.ln.gui.Main;
 
 public class Userstream extends Main {
+
+	private static final long serialVersionUID = 1L;
 	public static String ss, ss2;
 	public static String sc2 = "http://www.twitch.tv/directory/StarCraft%20II:%20Wings%20of%20Liberty";
 	public static String bw = "http://www.twitch.tv/directory/StarCraft:%20Brood%20War";

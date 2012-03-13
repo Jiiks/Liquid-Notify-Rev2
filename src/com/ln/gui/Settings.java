@@ -40,6 +40,9 @@ import java.awt.event.MouseEvent;
 import javax.swing.SwingConstants;
 
 public class Settings<play> extends JFrame {
+
+	private static final long serialVersionUID = 1L;
+	@SuppressWarnings("rawtypes")
 	static Settings frame = new Settings();
 	final JSpinner spinner = new JSpinner();
 	final JCheckBox chckbxNewCheckBox = new JCheckBox("");
