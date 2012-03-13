@@ -26,6 +26,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import org.pushingpixels.substance.api.skin.*;
 import com.ln.gui.Main;
+import com.ln.methods.Newsreader;
 
 public class Boot extends JFrame {
 
@@ -98,6 +99,7 @@ public class Boot extends JFrame {
 		}
 		catch(Exception e){			
 		}
+		Newsreader.Main();
 		@SuppressWarnings("rawtypes")
 		Main frame = new Main();
 		frame.setVisible(true);
