@@ -165,6 +165,7 @@ private static final long serialVersionUID = 1L;
 
 	@SuppressWarnings("unchecked")
 	public Main() {
+		System.gc();
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Configuration.mydir + "\\resources\\icons\\ln6464.png"));
 		DateFormat dd = new SimpleDateFormat("dd");
 		DateFormat dh = new SimpleDateFormat("HH");
@@ -525,13 +526,7 @@ private static final long serialVersionUID = 1L;
 					System.exit(0);			
 				}
 			}
-		});
-
-		
-		
-		
-		
-		
+		});	
 	}
 
 	@Override

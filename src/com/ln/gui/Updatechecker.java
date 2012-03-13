@@ -49,9 +49,6 @@ public class Updatechecker extends JFrame {
 
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -65,9 +62,6 @@ public class Updatechecker extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public Updatechecker() {
 		setResizable(false);
 		setTitle("Update");

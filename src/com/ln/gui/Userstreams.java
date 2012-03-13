@@ -27,9 +27,6 @@ public class Userstreams extends JFrame {
 	private JPanel contentPane;
 	private static JTable table;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -43,9 +40,6 @@ public class Userstreams extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public Userstreams() {
 		Userstream.Main();
 		setIconImage(Toolkit.getDefaultToolkit().getImage(Configuration.mydir + "\\resources\\icons\\ln6464.png"));
