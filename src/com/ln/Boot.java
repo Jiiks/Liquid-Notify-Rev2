@@ -43,7 +43,6 @@ public class Boot extends JFrame {
 			}
 		});
 	}
-
 	public Boot() {
 		if (!Configuration.config.exists()){
 			Configuration.config.mkdir();
