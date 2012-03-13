@@ -26,10 +26,10 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import org.pushingpixels.substance.api.skin.*;
 import com.ln.gui.Main;
-import com.ln.methods.Userstream;
 
 public class Boot extends JFrame {
 
+	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 
 	public static void main(String[] args) {
@@ -46,7 +46,6 @@ public class Boot extends JFrame {
 	}
 
 	public Boot() {
-		Userstream.Main();
 		if (!Configuration.config.exists()){
 			Configuration.config.mkdir();
 		}
@@ -101,6 +100,7 @@ public class Boot extends JFrame {
 		}
 		catch(Exception e){			
 		}
+		@SuppressWarnings("rawtypes")
 		Main frame = new Main();
 		frame.setVisible(true);
 		frame.setLocationRelativeTo(null);
