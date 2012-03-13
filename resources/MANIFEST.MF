@@ -1,0 +1,6 @@
+Main-Class: com.ln.Boot
+Manifest-Version: 1.0
+Class-Path: . lib/commons.jar lib/substance.jar lib/JCalande
+ r.jar lib/miglayout.jar lib/jcalendar.jar lib/trident.jar
+  lib/kefirbb.jar lib/jl.jar
+Created-By: 1.7.0_03 (Oracle Corporation)
