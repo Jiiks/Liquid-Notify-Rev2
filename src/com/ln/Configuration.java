@@ -24,7 +24,7 @@ package com.ln;
 import java.io.File;
 
 public class Configuration {
-		public static int version = 004;
+		public static int version = 005;
 		public static int autoupdate = 0;
 	    public static int notifytime = 0;
 	    public static int autorefresh = 0;
