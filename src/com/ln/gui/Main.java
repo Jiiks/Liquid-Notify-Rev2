@@ -104,9 +104,6 @@ private static final long serialVersionUID = 1L;
 	public Player asd;
 
 	
-	
-	
-
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -262,10 +259,8 @@ private static final long serialVersionUID = 1L;
 					}
 					}
 					}catch (MalformedURLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} catch (IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
 
@@ -415,8 +410,6 @@ private static final long serialVersionUID = 1L;
 			}
 		});
 		Image image = Toolkit.getDefaultToolkit().getImage(Configuration.mydir + "\\resources\\icons\\ln1616.png");
-		
-		//.setIcon(new ImageIcon(Configuration.mydir + "\\resources\\icons\\
 		final SystemTray tray = SystemTray.getSystemTray();
 		ActionListener listener = new ActionListener() {
 	        public void actionPerformed(ActionEvent e) {
@@ -530,11 +523,7 @@ private static final long serialVersionUID = 1L;
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-	
-		
-	}
-
+	public void actionPerformed(ActionEvent arg0) {}
 	@Override
 	public int compareTo(Object obj)
     {
@@ -560,7 +549,6 @@ private static final long serialVersionUID = 1L;
 						Refreshbtn.doClick();
 						refresh = 0;
 					}
-					
 				}
 				if (Configuration.autoupdate == 1){
 					aupd = aupd+1;
@@ -576,13 +564,10 @@ private static final long serialVersionUID = 1L;
 							swingupd();	
 						}
 						} catch (MalformedURLException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						} catch (IOException e) {
-							// TODO Auto-generated catch block
 							e.printStackTrace();
 						}
-
 						aupd = 0;
 					}
 				}
@@ -595,8 +580,7 @@ private static final long serialVersionUID = 1L;
 					Date minute2 = new Date();
 					int dayd2 = Integer.parseInt(dd.format(day2));
 					int hourh2 = Integer.parseInt(dh.format(hour2));
-					int minutem2 = Integer.parseInt(dm.format(minute2));
-					
+					int minutem2 = Integer.parseInt(dm.format(minute2));	
 					int daydiff = dayd2 - dayd;
 					int hourdiff = hourh2 - hourh;
 					int mindiff = minutem2 - minutem;
@@ -615,7 +599,6 @@ private static final long serialVersionUID = 1L;
 						if (Configuration.soundnotify == 1){
 							try {
 							    InputStream is = new FileInputStream(Configuration.soundpath);
-								//Player asd = new Player(is);
 							    asd = new Player(is);
 							    played = 1;
 							    asd.play();
@@ -632,12 +615,7 @@ private static final long serialVersionUID = 1L;
 				}
 				}catch (Exception e){}
 				Thread.sleep(minute);
-				//Thread.sleep(second*5);
-				
-				
-			}
-			
-			
+			}		
 		}
 	};
 	private final JMenuItem Tray = new JMenuItem("Send to tray");
