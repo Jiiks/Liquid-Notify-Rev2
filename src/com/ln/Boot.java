@@ -21,6 +21,8 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.Properties;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -67,6 +69,15 @@ public class Boot extends JFrame {
 			e1.printStackTrace();
 		} catch (NumberFormatException e1){
 			JOptionPane.showMessageDialog(null, "Missing config parameters, download latest cfg from github", "Error", JOptionPane.ERROR_MESSAGE);
+			try {
+				URL cfg = new URL("https://github.com/Jiiks/Liquid-Notify-Rev2/blob/master/resources/config.cfg");
+				String u = cfg.toString();
+				java.awt.Desktop.getDesktop().browse(java.net.URI.create(u));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
 		}
 		try{
 			if (Configuration.theme == 0){UIManager.setLookAndFeel(new SubstanceAutumnLookAndFeel());Configuration.theme = 0;}
