@@ -24,7 +24,7 @@ package com.ln;
 import java.io.File;
 
 public class Configuration {
-		public static int version = 005;
+		public static int version = 006;
 		public static int autoupdate = 0;
 	    public static int notifytime = 0;
 	    public static int autorefresh = 0;
@@ -33,6 +33,7 @@ public class Configuration {
 		public static int theme = 11;
 		public static int popup = 1;
 		public static String Year = "2012";
+		public static String aboutver = "0.24";
 		public static String soundpath = "";
 		public static String mydir = System.getProperty ("user.dir"); 
 		public static File config = new File(mydir + "/lib");
