@@ -27,10 +27,12 @@ import java.util.Properties;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import org.pushingpixels.substance.api.skin.*;
+
+import com.ln.gui.Loading;
 import com.ln.gui.Main;
 import com.ln.methods.Newsreader;
 
-public class Boot extends JFrame {
+public class Boot extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;

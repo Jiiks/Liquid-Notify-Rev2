@@ -55,10 +55,12 @@ public class Getcalendar {
 			//Source == String && Send source for parsing
 	        Parser.source = sw.toString();
 	        Betaparser.source = sw.toString();
-	        String lol = sw.toString();
-	        lol = StringUtils.substringBetween(lol, "<month year=\"2012\" num=\"2\">", "</month>");
-			Parser.parse();
-			Betaparser.parse();
+	        
+	        //String lol = sw.toString();
+	        //lol = StringUtils.substringBetween(lol, "<month year=\"2012\" num=\"2\">", "</month>");
+			//Parser.parse();
+			
+	        Betaparser.parse();
 
 
 
